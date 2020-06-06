@@ -1,7 +1,6 @@
 from block import Block
 
 class Blockchain:
-    from block import Block
     def __init__(self):
         self.chain = []
         self.unconfirmed_transactions = []
@@ -9,7 +8,7 @@ class Blockchain:
 
     def genesis_block(self):
         transactions = []
-        genesis_block = Block(transactions, '0')
+        genesis_block = Block(transactions, "0")
         genesis_block.generate_hash()
         self.chain.append(genesis_block)
 
@@ -17,9 +16,8 @@ class Blockchain:
         previous_hash = (self.chain[len(self.chain)-1]).hash
         new_block = Block(transactions, previous_hash)
         new_block.generate_hash()
-        proof = self.proof_of_work(new_block)
+        #proof = self.proof_of_work(new_block)
         self.chain.append(new_block)
-        return proof, new_block
 
     def print_blocks(self):
         for i in range(len(self.chain)):
@@ -41,7 +39,7 @@ class Blockchain:
 
     def proof_of_work(self, block, difficulty = 2):
         proof = block.generate_hash()
-        while proof[:2] != '0'*difficulty:
+        while proof[:2] != "0" * difficulty:
             block.nonce += 1
             proof = block.generate_hash()
         block.nonce = 0
